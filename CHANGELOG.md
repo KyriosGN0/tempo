@@ -6,7 +6,7 @@
 * [ENHANCEMENT] Pushdown collection of results from generators in the querier [#4119](https://github.com/grafana/tempo/pull/4119) (@electron0zero)
 * [CHANGE] Add throughput and SLO metrics in the tags and tag values endpoints [#4148](https://github.com/grafana/tempo/pull/4148) (@electron0zero)
 * [CHANGE] tempo-cli: add support for /api/v2/traces endpoint [#4127](https://github.com/grafana/tempo/pull/4127) (@electron0zero)
-  **BREAKING CHANGE** The `tempo-cli` now uses the `/api/v2/traces` endpoint by default, 
+  **BREAKING CHANGE** The `tempo-cli` now uses the `/api/v2/traces` endpoint by default,
   please use `--v1` flag to use `/api/traces` endpoint, which was the default in previous versions.
 * [CHANGE] TraceByID: don't allow concurrent_shards greater than query_shards. [#4074](https://github.com/grafana/tempo/pull/4074) (@electron0zero)
 * [CHANGE] **BREAKING CHANGE** The dynamic injection of X-Scope-OrgID header for metrics generator remote-writes is changed. If the header is aleady set in per-tenant overrides or global tempo configuration, then it is honored and not overwritten. [#4021](https://github.com/grafana/tempo/pull/4021) (@mdisibio)
@@ -28,7 +28,7 @@
 * [ENHANCEMENT] Update metrics-generator config in Tempo distributed docker compose example to serve TraceQL metrics [#4003](https://github.com/grafana/tempo/pull/4003) (@javiermolinar)
 * [ENHANCEMENT] Reduce allocs related to marshalling dedicated columns repeatedly in the query frontend. [#4007](https://github.com/grafana/tempo/pull/4007) (@joe-elliott)
 * [ENHANCEMENT] Improve performance of TraceQL queries [#4114](https://github.com/grafana/tempo/pull/4114) (@mdisibio)
-* [ENHANCEMENT] Improve performance of TraceQL queries [#4163](https://github.com/grafana/tempo/pull/4163) (@mdisibio) 
+* [ENHANCEMENT] Improve performance of TraceQL queries [#4163](https://github.com/grafana/tempo/pull/4163) (@mdisibio)
 * [ENHANCEMENT] Reduce memory usage of classic histograms in the span-metrics and service-graphs processors [#4232](https://github.com/grafana/tempo/pull/4232) (@mdisibio)
 * [ENHANCEMENT] Implement simple Fetch by key for cache items  [#4032](https://github.com/grafana/tempo/pull/4032) (@javiermolinar)
 * [ENHANCEMENT] Replace Grafana Agent example by Grafana Alloy[#4030](https://github.com/grafana/tempo/pull/4030) (@javiermolinar)
@@ -109,7 +109,7 @@
 * [ENHANCEMENT] Add vParquet4 support to the tempo-cli analyse blocks command [#3868](https://github.com/grafana/tempo/pull/3868) (@stoewer)
 * [ENHANCEMENT] Improve trace id lookup from Tempo Vulture by selecting a date range [#3874](https://github.com/grafana/tempo/pull/3874) (@javiermolinar)
 * [ENHANCEMENT] Add native histograms for internal metrics[#3870](https://github.com/grafana/tempo/pull/3870) (@zalegrala)
-* [ENHANCEMENT] Expose availability-zone as a cli flag in ingester [#3881](https://github.com/grafana/tempo/pull/3881)
+* [ENHANCEMENT] Expose availability-zone as a cli flag in ingester [#3881](https://github.com/grafana/tempo/pull/3881) (@KyriosGN0)
 * [ENHANCEMENT] Rename batches property of Trace to ResourceSpans to be OTEL compatible [#3895](https://github.com/grafana/tempo/pull/3895)
 * [ENHANCEMENT] Reduce memory consumption of query-frontend[#3888](https://github.com/grafana/tempo/pull/3888) (@joe-elliott)
 * [ENHANCEMENT] Reduce log level verbosity for e2e tests[#3900](https://github.com/grafana/tempo/pull/3900) (@javiermolinar)
@@ -151,7 +151,7 @@
   properly.  A jsonnet example of an init container is included with the PR.
   This impacts all users of the `grafana/tempo` Docker image.
 * [CHANGE] Remove vParquet encoding [#3663](https://github.com/grafana/tempo/pull/3663) (@mdisibio)
-  **BREAKING CHANGE** In the last release vParquet (the first version) was deprecated and blocked from writes. Now, it's 
+  **BREAKING CHANGE** In the last release vParquet (the first version) was deprecated and blocked from writes. Now, it's
   removed entirely.  It will no longer be recognized as a valid encoding and cannot read any remaining vParquet blocks. Installations
   running with historical defaults should not require any changes as the default has been migrated for several releases. Installations
   with storage settings pinned to vParquet must run a previous release configured for vParquet2 or higher until all existing vParquet (1) blocks
@@ -164,7 +164,7 @@
 * [CHANGE] Add golangci to the tools image and update `lint` make target [#3610](https://github.com/grafana/tempo/pull/3610) (@zalegrala)
 * [CHANGE] Update Alpine image version to 3.20 [#3710](https://github.com/grafana/tempo/pull/3710) (@joe-elliott)
 * [FEATURE] Add TLS support for Memcached Client [#3585](https://github.com/grafana/tempo/pull/3585) (@sonisr)
-* [FEATURE] TraceQL metrics queries: add quantile_over_time [#3605](https://github.com/grafana/tempo/pull/3605) [#3633](https://github.com/grafana/tempo/pull/3633) (@mdisibio) 
+* [FEATURE] TraceQL metrics queries: add quantile_over_time [#3605](https://github.com/grafana/tempo/pull/3605) [#3633](https://github.com/grafana/tempo/pull/3633) (@mdisibio)
 * [FEATURE] TraceQL metrics queries: add histogram_over_time [#3644](https://github.com/grafana/tempo/pull/3644) (@mdisibio)
 * [FEATURE] Added gRPC streaming endpoints for Tempo APIs.
   * Added gRPC streaming endpoints for all tag queries. [#3460](https://github.com/grafana/tempo/pull/3460) (@joe-elliott)

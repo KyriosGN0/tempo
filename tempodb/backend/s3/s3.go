@@ -143,14 +143,13 @@ func getPutObjectOptions(rw *readerWriter) minio.PutObjectOptions {
 			StorageClass: rw.cfg.StorageClass,
 			UserMetadata: rw.cfg.Metadata,
 		}
-	} else {
-		return minio.PutObjectOptions{
-			PartSize:             rw.cfg.PartSize,
-			UserTags:             rw.cfg.Tags,
-			StorageClass:         rw.cfg.StorageClass,
-			UserMetadata:         rw.cfg.Metadata,
-			ServerSideEncryption: sseConfig,
-		}
+	}
+	return minio.PutObjectOptions{
+		PartSize:             rw.cfg.PartSize,
+		UserTags:             rw.cfg.Tags,
+		StorageClass:         rw.cfg.StorageClass,
+		UserMetadata:         rw.cfg.Metadata,
+		ServerSideEncryption: sseConfig,
 	}
 }
 
@@ -158,10 +157,9 @@ func getObjectOptions(rw *readerWriter) minio.GetObjectOptions {
 	sseConfig, err := buildSSEConfig(rw.cfg)
 	if sseConfig == nil && err == nil {
 		return minio.GetObjectOptions{}
-	} else {
-		return minio.GetObjectOptions{
-			ServerSideEncryption: sseConfig,
-		}
+	}
+	return minio.GetObjectOptions{
+		ServerSideEncryption: sseConfig,
 	}
 }
 

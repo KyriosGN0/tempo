@@ -131,6 +131,7 @@ func internalNew(cfg *Config, confirm bool) (*readerWriter, error) {
 		core:       core,
 		hedgedCore: hedgedCore,
 	}
+
 	return rw, nil
 }
 
@@ -711,7 +712,7 @@ func parseKMSEncryptionContext(data string) (map[string]string, error) {
 	}
 
 	decoded := map[string]string{}
-	err := fmt.Errorf("unable to parse KMS encryption context %w", json.Unmarshal([]byte(data), &decoded))
+	err := json.Unmarshal([]byte(data), &decoded)
 	return decoded, err
 }
 
@@ -720,16 +721,20 @@ func buildSSEConfig(cfg *Config) (encrypt.ServerSide, error) {
 	case "":
 		return nil, nil
 	case SSEKMS:
-		encryptionCtx, err := parseKMSEncryptionContext(cfg.SSE.KMSEncryptionContext)
-		if err != nil {
-			return nil, err
-		}
+		if cfg.SSE.KMSKeyID == "" {
+			return nil, errors.New("KMSKeyID is missing")
+		} else {
+			encryptionCtx, err := parseKMSEncryptionContext(cfg.SSE.KMSEncryptionContext)
+			if err != nil {
+				return nil, err
+			}
+			if encryptionCtx == nil {
+				// To overcome a limitation in Minio which checks interface{} == nil.
 
-		if encryptionCtx == nil {
-			// To overcome a limitation in Minio which checks interface{} == nil.
-			return encrypt.NewSSEKMS(cfg.SSE.KMSKeyID, nil)
+				return encrypt.NewSSEKMS(cfg.SSE.KMSKeyID, nil)
+			}
+			return encrypt.NewSSEKMS(cfg.SSE.KMSKeyID, encryptionCtx)
 		}
-		return encrypt.NewSSEKMS(cfg.SSE.KMSKeyID, encryptionCtx)
 	case SSES3:
 		return encrypt.NewSSE(), nil
 	default:
